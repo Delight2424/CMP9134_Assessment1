@@ -1,35 +1,85 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { ProtectedRoute } from "./components/ProtectedRoute";
+import Dashboard from "./pages/Dashboard";
+import Logs from "./pages/Logs";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import Users from "./pages/Users";
+import { ToastContainer } from "react-toastify";
+import Sensors from "./pages/Sensors";
+import { useTelemetry } from "./hooks/useTelemetry";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const { telemetry, connected, socketError, lastUpdated, isLoading } =
+    useTelemetry();
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        hideProgressBar
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+        className="text-white text-center font-medium !font-montserrat"
+      />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/signup" element={<SignUp />} />
 
-export default App
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <Dashboard
+                  telemetry={telemetry}
+                  connected={connected}
+                  socketError={socketError}
+                  lastUpdated={lastUpdated}
+                />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sensors"
+            element={
+              <ProtectedRoute>
+                <Sensors
+                  telemetry={telemetry}
+                  socketError={socketError}
+                  isLoading={isLoading}
+                />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/logs"
+            element={
+              <ProtectedRoute>
+                <Logs />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute>
+                <Users />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </BrowserRouter>
+    </>
+  );
+}
