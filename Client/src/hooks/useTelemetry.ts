@@ -11,14 +11,14 @@ export const useTelemetry = () => {
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimerRef = useRef<number | null>(null);
 
-  const ROBOT_API_BASE_URL = import.meta.env.VITE_ROBOT_API_BASE_URL;
+  const VITE_TELEMETRY_WS_URL = import.meta.env.VITE_TELEMETRY_WS_URL;
 
   useEffect(() => {
     let isUnmounted = false;
     setIsLoading(true);
 
     const connect = () => {
-      const ws = new WebSocket(`${ROBOT_API_BASE_URL}/ws/telemetry`);
+      const ws = new WebSocket(`${VITE_TELEMETRY_WS_URL}/ws/telemetry`);
 
       wsRef.current = ws;
 

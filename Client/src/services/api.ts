@@ -24,8 +24,16 @@ apiClient.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      clearAuth();
-      window.location.href = "/signin";
+      const currentPath = window.location.pathname;
+
+      const isAuthPage =
+        currentPath === "/signin" || currentPath === "/signup";
+
+      if (!isAuthPage) {
+        clearAuth();
+        window.location.href = "/signin";
+      }
+
     }
 
     return Promise.reject(error);

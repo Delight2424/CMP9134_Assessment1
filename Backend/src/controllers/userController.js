@@ -5,6 +5,13 @@ export const getUsers = async (req, res) => {
   try {
     const users = await User.find().select("-password").sort({ createdAt: -1 });
 
+    await recordAudit({
+      req,
+      action: "GET_USERS",
+      payload: {},
+      success: true,
+    });
+
     return res.json({
       success: true,
       message: "Users fetched successfully",

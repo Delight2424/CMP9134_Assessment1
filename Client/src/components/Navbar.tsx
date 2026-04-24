@@ -27,6 +27,7 @@ const Navbar = () => {
     <header className="border-b border-slate-200 bg-white shadow-sm">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <div className="flex items-center gap-3">
+          <img src="/pngwing.com.png" alt="Robot Image" className="h-[40px] w-[40px]"/>
           <span className="text-lg font-bold text-slate-900">GCS</span>
 
           <nav className="flex items-center gap-2">

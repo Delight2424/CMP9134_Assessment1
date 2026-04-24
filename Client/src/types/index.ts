@@ -41,6 +41,7 @@ export type AuditEntry = {
   userEmail: string | null;
   userForename: string | null;
   action: string;
+  userRole: string;
   payload: Record<string, unknown>;
   success: boolean;
   errorMessage: string | null;

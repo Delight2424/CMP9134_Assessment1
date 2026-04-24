@@ -15,10 +15,14 @@ const auditEntrySchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+    userRole: {
+      type: String,
+      default: null,
+    },
     action: {
       type: String,
       required: true,
-      enum: ["MOVE", "RESET", "STATUS", "MAP", "SENSOR", "ROLE_UPDATE"],
+      enum: ["MOVE", "RESET", "STATUS", "MAP", "SENSOR", "ROLE_UPDATE", "GET_USERS"],
     },
     payload: {
       type: Object,

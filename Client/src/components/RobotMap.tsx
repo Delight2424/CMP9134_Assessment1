@@ -1,4 +1,3 @@
-import { Bot } from "lucide-react";
 import type { RobotMap, TelemetryData } from "../types";
 
 type Props = {
@@ -71,13 +70,12 @@ const RobotMapView = ({ map, telemetry, isLoading }: Props) => {
               return (
                 <div
                   key={`${rowIndex}-${colIndex}`}
-                  className={`flex aspect-square items-center justify-center rounded-[4px] text-[10px] font-medium ${
-                    isRobot
+                  className={`flex aspect-square items-center justify-center rounded-[4px] text-[10px] font-medium ${isRobot
                       ? "bg-blue-600 text-white"
                       : cell === 1
                         ? "bg-rose-400 text-white"
                         : "bg-white text-slate-400"
-                  }`}
+                    }`}
                   title={
                     isRobot
                       ? `Robot (${colIndex}, ${rowIndex})`
@@ -85,7 +83,10 @@ const RobotMapView = ({ map, telemetry, isLoading }: Props) => {
                         ? `Obstacle (${colIndex}, ${rowIndex})`
                         : `Free (${colIndex}, ${rowIndex})`
                   }>
-                  {isRobot ? <Bot size={22} /> : ""}
+                  {/* {isRobot ? <Bot size={22} /> : ""} */}
+                 {isRobot ? <img src="/pngwing.com.png" alt="Robot Image" className="h-[30px] w-[30px]" /> : ""}
+
+
                 </div>
               );
             }),

@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use("/api/auth", authRoutes);
-app.use("/api/robot", robotRoutes);
+app.use("/api/robot", robotRoutes); 
 app.use("/api/audit", auditRoutes);
 app.use("/api/users", userRoutes);
 

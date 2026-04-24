@@ -14,7 +14,7 @@ export const recordAudit = async ({
       userId: req.currentUser?.userId || null,
       userEmail: req.currentUser?.email || null,
       userForename: req.currentUser?.forename || null,
-      role: req.currentUser?.role || null,
+      userRole: req.currentUser?.role || null,
       action,
       payload,
       robotStateBefore,

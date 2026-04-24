@@ -16,6 +16,9 @@ const LogsTable = ({ logs }: { logs: AuditEntry[] }) => {
             <th className="px-4 py-3 text-left font-semibold text-slate-700">
               User
             </th>
+              <th className="px-4 py-3 text-left font-semibold text-slate-700">
+              Role
+            </th>
             <th className="px-4 py-3 text-left font-semibold text-slate-700">
               Success
             </th>
@@ -37,6 +40,9 @@ const LogsTable = ({ logs }: { logs: AuditEntry[] }) => {
               <td className="px-4 py-3 text-slate-800">{log.action}</td>
               <td className="px-4 py-3 text-slate-600">
                 {log.userEmail || "Unknown"}
+              </td>
+              <td className="px-4 py-3 text-slate-600">
+                {log.userRole || ""}
               </td>
               <td className="px-4 py-3">
                 <span
