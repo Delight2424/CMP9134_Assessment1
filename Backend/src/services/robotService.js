@@ -1,8 +1,10 @@
 import fetch from "node-fetch";
+import "dotenv/config";
 
+const ROBOT_API_BASE_URL = process.env.ROBOT_API_BASE_URL;
 class RobotService {
   constructor() {
-    this.baseUrl = "http://localhost:5000";
+    this.baseUrl = ROBOT_API_BASE_URL;
   }
 
   async parseResponse(response, label) {

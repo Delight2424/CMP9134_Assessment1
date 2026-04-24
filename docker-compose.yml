@@ -1,0 +1,36 @@
+services:
+  robot-api:
+    image: ghcr.io/francescodelduchetto/cmp9134_2526_robotsim:latest
+    container_name: gcs-robot-api
+    restart: unless-stopped
+    ports:
+      - "5001:5000"
+
+  backend:
+    build:
+      context: ./Backend
+    container_name: emmanuel-gcs-backend
+    restart: unless-stopped
+    ports:
+      - "4000:4000"
+    environment:
+      PORT: "4000"
+      MONGO_URI: "mongodb+srv://emmanuelobite2424_db_user:MHE5dnvYjgPzOLqc@cluster0.tlmsfgr.mongodb.net/"
+      JWT_SECRET: "emmanuel_secret_key"
+      ROBOT_API_BASE_URL: "http://robot-api:5000"
+    depends_on:
+      - robot-api
+
+  frontend:
+    build:
+      context: ./Client
+    container_name: emmanuel-gcs-frontend
+    restart: unless-stopped
+    ports:
+      - "2500:2500"
+    environment:
+      VITE_API_BASE_URL: "http://localhost:4000"
+      VITE_ROBOT_API_BASE_URL: "http://robot-api:5000"
+      VITE_TELEMETRY_WS_URL: "ws://localhost:5001"
+    depends_on:
+      - backend
