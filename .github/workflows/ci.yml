@@ -40,10 +40,10 @@ jobs:
         run: |
           docker-compose exec -T backend npm run test
 
-      # Uncomment to run frontend tests
-      # - name: Run tests for Frontend
+      # Uncomment to run client tests
+      # - name: Run tests for Client
       #   run: |
-      #     docker-compose exec -T frontend npm run test
+      #     docker-compose exec -T client npm run test
 
       - name: Tear down the containers
         run: |
@@ -59,7 +59,7 @@ jobs:
       # Push Docker images to Docker Hub
       - name: Push Docker Images
         run: |
-          docker build -t delight35312424/my-frontend-image ./frontend
-          docker push delight35312424/my-frontend-image
-          docker build -t delight35312424/my-backend-image ./backend
+          docker build -t delight35312424/my-client-image ./Client
+          docker push delight35312424/my-client-image
+          docker build -t delight35312424/my-backend-image ./Backend
           docker push delight35312424/my-backend-image
